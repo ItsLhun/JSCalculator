@@ -9,7 +9,7 @@ body {
 }
 
 body {
-  color: #3a3a3a;
+  color: #575555;
   background: #ebe9e9;
 }
 
@@ -20,11 +20,7 @@ body {
           box-sizing: inherit;
 }
 
-.fullPageWrapper {
-  height: 100% .fullPageWrapper;
-}
-
-header {
+.mainWrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,41 +28,136 @@ header {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-align: center;
   margin-left: auto;
   margin-right: auto;
-  height: 8vh;
-  width: 100%;
-}
-
-.title {
-  margin: 0;
-  font-size: 3rem;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.mainWrapper {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 350px;
   width: 100%;
   min-height: 400px;
-  height: 85vh;
+  height: 95vh;
+}
+
+.calculatorFrame {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: auto;
+  background: grey;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+  min-height: 500px;
+  min-width: 325px;
+  padding: 5px;
+}
+
+.titleFrame {
+  width: 100%;
+}
+
+.resultDisplay {
+  min-height: 130px;
+  background: rgba(255, 255, 255, 0.979);
+  margin-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.resultDisplay .operationTail {
+  text-align: right;
+  font-size: 2rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.resultDisplay .result {
+  text-align: right;
+  bottom: 0;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 4rem;
+}
+
+.buttonsHold {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 2px;
+  -ms-grid-columns: 4;
+      grid-template-columns: 4;
+  -ms-grid-rows: 5;
+      grid-template-rows: 5;
+}
+
+button[name="%"] {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 1;
+  grid-column: 1;
+}
+
+button[name="CE"] {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 2;
+  grid-column: 2;
+}
+
+button[name="C"] {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 3;
+  grid-column: 3;
+}
+
+button[name="Del"] {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  -ms-grid-column: 4;
+  grid-column: 4;
+}
+
+button[name="7"] {
+  -ms-grid-row: 2;
+  grid-row: 2;
+  -ms-grid-column: 1;
+  grid-column: 1;
+}
+
+button[name="="] {
+  -ms-grid-row: 5;
+  grid-row: 5;
+  -ms-grid-column: 4;
+  grid-column: 4;
+  background: #6496e2;
+}
+
+.button {
+  border: 0;
+  width: 8.2rem;
+  height: 5.6rem;
+}
+
+.button:hover {
+  background: #d6d3d3b2;
+}
+
+.darkerButton {
+  background: #d3d1d1;
+}
+
+.lighterButton {
+  background: #ececec;
+}
+
+.numButton {
+  font-weight: bold;
 }
 
 footer {
@@ -107,7 +198,7 @@ footer p a svg {
 }
 
 footer p a svg:hover {
-  fill: #ed8818;
+  fill: #c4a315;
 }
 
 @media get-query-branches {

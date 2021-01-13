@@ -1,7 +1,10 @@
-$darkGrey: #3a3a3a;
+$darkGrey: #575555;
 $dirtyWhite: #ebe9e9;
 $normalGrey: #8f8e8e;
 $accentBlue: #6496e2;
+$darkButton: #d3d1d1;
+$lightButton: rgb(236, 236, 236);
+$buttonHover: #d6d3d3b2;
 
 html,
 body {
@@ -58,33 +61,99 @@ $breakpoints: (
     @content;
   }
 }
-.fullPageWrapper {
-  height: 100%&;
-}
-header {
+
+.mainWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  @include centerMargin();
-  height: 8vh;
-  width: 100%;
-}
-.title {
-  margin: 0;
-  font-size: 3rem;
-  justify-content: center;
-  align-items: center;
-  @include centerMargin();
-}
-.mainWrapper {
-  display: block;
   margin-left: auto;
   margin-right: auto;
-  min-width: 350px;
   width: 100%;
   min-height: 400px;
-  height: 85vh;
+  height: 95vh;
+}
+
+.calculatorFrame {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background: grey;
+  align-self: center;
+  justify-self: center;
+  min-height: 500px;
+  min-width: 325px;
+  padding: 5px;
+}
+.titleFrame {
+  width: 100%;
+}
+.resultDisplay {
+  min-height: 130px;
+  background: rgba(255, 255, 255, 0.979);
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  .operationTail {
+    text-align: right;
+    font-size: 2rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .result {
+    text-align: right;
+    bottom: 0;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 4rem;
+  }
+}
+.buttonsHold {
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: 4;
+  grid-template-rows: 5;
+}
+button[name="%"] {
+  grid-row: 1;
+  grid-column: 1;
+}
+button[name="CE"] {
+  grid-row: 1;
+  grid-column: 2;
+}
+button[name="C"] {
+  grid-row: 1;
+  grid-column: 3;
+}
+button[name="Del"] {
+  grid-row: 1;
+  grid-column: 4;
+}
+button[name="7"] {
+  grid-row: 2;
+  grid-column: 1;
+}
+button[name="="] {
+  grid-row: 5;
+  grid-column: 4;
+  background: $accentBlue;
+}
+
+.button {
+  border: 0;
+  width: 8.2rem;
+  height: 5.6rem;
+  &:hover {
+    background: $buttonHover;
+  }
+}
+.darkerButton {
+  background: $darkButton;
+}
+.lighterButton {
+  background: $lightButton;
+}
+.numButton {
+  font-weight: bold;
 }
 
 footer {
@@ -108,7 +177,7 @@ footer {
         stroke: $accentBlue;
         transform: scale(1.6);
         &:hover {
-          fill: #ed8818;
+          fill: #c4a315;
         }
       }
     }

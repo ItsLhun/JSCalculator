@@ -71,9 +71,28 @@ document.addEventListener('keydown', e => {
 function addition(numA,numB){
     return numA+numB;
 }
+function substraction(numA,numB){
+    return numA-numB;
+}
+function division(numA,numB){
+    return Float(numA/numB);
+}
+function multiplication(numA,numB){
+    return numA*numB;
+}
+function substraction(numA,numB){
+    return numA-numB;
+}
+function substraction(numA,numB){
+    return numA-numB;
+}
+
+
 
 function calculate(operator, numA, numB){
-
+    if (operator === "sum"){
+        return addition(numA,numB);
+    }
 }
 
 function updateDisplay(item){

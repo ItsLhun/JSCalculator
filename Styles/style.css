@@ -138,6 +138,10 @@ button[name="="] {
   background: #6496e2;
 }
 
+button[name="="]:hover {
+  background: #3064b3;
+}
+
 .button {
   border: 0;
   width: 8.2rem;

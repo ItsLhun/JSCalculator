@@ -136,6 +136,9 @@ button[name="="] {
   grid-row: 5;
   grid-column: 4;
   background: $accentBlue;
+  &:hover {
+    background: #3064b3;
+  }
 }
 
 .button {

@@ -1,22 +1,40 @@
-let displayValue ="";
+let displayValue = "";
 let tailValue = "";
-// The two main displays 
+let floatingPressed = false;
+let bufferOperator = "";
+// The two main displays
 const operationTail = document.querySelector("#operationTail");
 const resultDisplay = document.querySelector("#result");
+const operandDisplay = document.querySelector("#operand");
 
 // Buttons query
-    //operators
+//operators
+const plusButton = document.querySelector("#plus");
+const minusButton = document.querySelector("#minus");
+const multiplyButton = document.querySelector("#multiplication");
 const divisionButton = document.querySelector("#division");
+
 const cEverythingButton = document.querySelector("#clearEverything");
 const clearButton = document.querySelector("#clear");
 const delButton = document.querySelector("#delete");
-const multiplyButton = document.querySelector("#multiplication");
-const minusButton = document.querySelector("#minus");
-const plusButton = document.querySelector("#plus");
 const changeSymbol = document.querySelector("#changeSymbol");
 const floatingPoint = document.querySelector("#floatingPoint");
+floatingPoint.addEventListener("click", function () {
+  if (floatingPressed === true) {
+  } else {
+    if (displayValue.length > 0) {
+      updateDisplay(".");
+      0;
+      floatingPressed = true;
+    } else {
+      updateDisplay("0.");
+      floatingPressed = true;
+    }
+  }
+});
+
 const equalButton = document.querySelector("#equal");
-    //numbers
+//numbers
 const zeroButton = document.querySelector("#zero");
 const oneButton = document.querySelector("#one");
 const twoButton = document.querySelector("#two");
@@ -28,7 +46,7 @@ const sevenButton = document.querySelector("#seven");
 const eightButton = document.querySelector("#eight");
 const nineButton = document.querySelector("#nine");
 
-let arrayNumBut = []; 
+let arrayNumBut = [];
 arrayNumBut.push(zeroButton);
 arrayNumBut.push(oneButton);
 arrayNumBut.push(twoButton);
@@ -40,66 +58,87 @@ arrayNumBut.push(sevenButton);
 arrayNumBut.push(eightButton);
 arrayNumBut.push(nineButton);
 
-for (let i=0; i<arrayNumBut.length; i++){
-    arrayNumBut[i].addEventListener("click", function(){
-        updateDisplay(i);
-    })
+for (let i = 0; i < arrayNumBut.length; i++) {
+  arrayNumBut[i].addEventListener("click", function () {
+    updateDisplay(i);
+  });
 }
 
-document.addEventListener('keydown', e => {
+document.addEventListener(
+  "keydown",
+  (e) => {
     let code;
     if (e.key !== undefined) {
-        code = e.key;
-      } else if (e.keyIdentifier !== undefined) {
-        code = e.keyIdentifier;
-      } else if (e.keyCode !== undefined) {
-        code = e.keyCode;
-      }
-      console.log(code);
-      if (code === "."){
-        updateDisplay(".");
-      }
-      else if (Number.isNaN(Number(code))){
+      code = e.key;
+    } else if (e.keyIdentifier !== undefined) {
+      code = e.keyIdentifier;
+    } else if (e.keyCode !== undefined) {
+      code = e.keyCode;
+    }
+    console.log(code);
+    if (code === ".") {
+      if (floatingPressed === true) {
       } else {
-        updateDisplay(code);
+        updateDisplay(".");
+        floatingPressed = true;
       }
-      
-}, false);
-
+    } else if (
+      code === "+" ||
+      code === "-" ||
+      code === "/" ||
+      code === "*" ||
+      code === "Enter"
+    ) {
+      bufferOperator = code;
+    } else if (Number.isNaN(Number(code))) {
+    } else {
+      updateDisplay(code);
+    }
+  },
+  false
+);
 
 //operation fuctions
-function addition(numA,numB){
-    return numA+numB;
+function addition(numA, numB) {
+  return numA + numB;
 }
-function substraction(numA,numB){
-    return numA-numB;
+function substraction(numA, numB) {
+  return numA - numB;
 }
-function division(numA,numB){
-    return Float(numA/numB);
+function division(numA, numB) {
+  return Float(numA / numB);
 }
-function multiplication(numA,numB){
-    return numA*numB;
+function multiplication(numA, numB) {
+  return numA * numB;
 }
-function substraction(numA,numB){
-    return numA-numB;
+function substraction(numA, numB) {
+  return numA - numB;
 }
-function substraction(numA,numB){
-    return numA-numB;
-}
-
-
-
-function calculate(operator, numA, numB){
-    if (operator === "sum"){
-        return addition(numA,numB);
-    }
+function substraction(numA, numB) {
+  return numA - numB;
 }
 
-function updateDisplay(item){
-    displayValue+=item;
+function calculate(operator, numA, numB) {
+  let result;
+  if (operator === "sum") {
+    result = addition(numA, numB);
+  }
+  tailValue = result;
+  updateTail();
+}
+
+function updateDisplay(item) {
+  if (bufferOperator === "") {
+    displayValue += item;
     resultDisplay.textContent = displayValue;
+  } else {
+    if (tailValue === "") {
+      tailValue = displayValue;
+      updateTail();
+    }
+  }
 }
 
-function updateTail(){
-    operationTail.textContent = tailValue;
+function updateTail() {
+  operationTail.textContent = tailValue;
 }

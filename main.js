@@ -32,9 +32,12 @@ for (let i = 0; i < arrayOperators.length; i++) {
     if (arrayOperators[i].value === "Enter") {
       if (pendingOperation === true) {
         calculate(bufferOperator, tailValue, displayValue);
+        updateDisplay("");
       }
     } else if (pendingOperation === true) {
       calculate(bufferOperator, tailValue, displayValue);
+      updateBufferOperator(arrayOperators[i].value);
+      pendingOperation = true;
     } else {
       updateBufferOperator(arrayOperators[i].value);
       pendingOperation = true;
@@ -61,6 +64,14 @@ delButton.addEventListener("click", function () {
 });
 
 const changeSymbol = document.querySelector("#changeSymbol");
+changeSymbol.addEventListener("click", () => {
+  if (displayValue.charAt(0) === "-") {
+    displayValue = displayValue.substring(1);
+  } else {
+    displayValue = "-" + displayValue;
+  }
+  resultDisplay.textContent = displayValue;
+});
 
 const floatingPoint = document.querySelector("#floatingPoint");
 floatingPoint.addEventListener("click", processPoint);
@@ -131,10 +142,11 @@ document.addEventListener(
         if (pendingOperation === true) {
           calculate(bufferOperator, tailValue, displayValue);
           updateDisplay("");
-          55;
         }
       } else if (pendingOperation === true) {
         calculate(bufferOperator, tailValue, displayValue);
+        updateBufferOperator(code);
+        pendingOperation = true;
       } else {
         updateBufferOperator(code);
         pendingOperation = true;
@@ -173,6 +185,7 @@ function processPoint() {
 function calculate(operator, numA, numB) {
   let result;
   if (displayValue === "") {
+    pendingOperation = false;
   } else {
     if (pendingOperation === true && numA === "") {
       tailValue = displayValue;

@@ -58,6 +58,11 @@ body {
   width: 100%;
 }
 
+.title {
+  padding-left: 7px;
+  font-family: "Roboto Mono", monospace;
+}
+
 .resultDisplay {
   min-height: 130px;
   background: rgba(255, 255, 255, 0.979);
@@ -176,10 +181,11 @@ button[name="="]:hover {
 }
 
 footer {
+  margin-top: 0;
   background: transparent;
   position: relative;
   width: 100%;
-  height: 5vh;
+  height: 3.5vh;
   clear: both;
 }
 

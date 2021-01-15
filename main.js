@@ -24,10 +24,17 @@ arrayOperators.push(equalButton);
 
 for (let i = 0; i < arrayOperators.length; i++) {
   arrayOperators[i].addEventListener("click", function () {
+    if (tailValue === "") {
+      tailValue = Number(Number(displayValue).toFixed(5));
+      updateTail();
+      updateDisplay("");
+    }
     if (arrayOperators[i].value === "Enter") {
-      if (!(bufferOperator === "") && pendingOperation === true) {
+      if (pendingOperation === true) {
         calculate(bufferOperator, tailValue, displayValue);
       }
+    } else if (pendingOperation === true) {
+      calculate(bufferOperator, tailValue, displayValue);
     } else {
       updateBufferOperator(arrayOperators[i].value);
       pendingOperation = true;
@@ -115,7 +122,23 @@ document.addEventListener(
       code === "*" ||
       code === "Enter"
     ) {
-      updateBufferOperator(code);
+      if (tailValue === "") {
+        tailValue = Number(Number(displayValue).toFixed(5));
+        updateTail();
+        updateDisplay("");
+      }
+      if (code === "Enter") {
+        if (pendingOperation === true) {
+          calculate(bufferOperator, tailValue, displayValue);
+          updateDisplay("");
+          55;
+        }
+      } else if (pendingOperation === true) {
+        calculate(bufferOperator, tailValue, displayValue);
+      } else {
+        updateBufferOperator(code);
+        pendingOperation = true;
+      }
     } else if (Number.isNaN(Number(code))) {
     } else {
       updateDisplay(code);
@@ -135,7 +158,7 @@ function multiplication(numA, numB) {
   return numA * numB;
 }
 function division(numA, numB) {
-  return Float(Float(numA) / numB);
+  return numA / numB;
 }
 
 function processPoint() {
@@ -149,21 +172,29 @@ function processPoint() {
 
 function calculate(operator, numA, numB) {
   let result;
-  if (operator === "+") {
-    result = addition(numA, numB);
+  if (displayValue === "") {
+  } else {
+    if (pendingOperation === true && numA === "") {
+      tailValue = displayValue;
+      displayValue = "";
+    }
+    if (operator === "+") {
+      result = addition(parseFloat(numA), parseFloat(numB));
+    }
+    if (operator === "-") {
+      result = substraction(parseFloat(numA), parseFloat(numB));
+    }
+    if (operator === "*") {
+      result = multiplication(parseFloat(numA), parseFloat(numB));
+    }
+    if (operator === "/") {
+      result = division(parseFloat(numA), parseFloat(numB));
+    }
+    tailValue = Number(result.toFixed(5));
+    pendingOperation = false;
+    updateTail();
+    updateDisplay("");
   }
-  if (operator === "-") {
-    result = substraction(numA, numB);
-  }
-  if (operator === "*") {
-    result = multiplication(numA, numB);
-  }
-  if (operator === "/") {
-    result = division(numA, numB);
-  }
-  tailValue = result;
-  updateTail();
-  pendingOperation = false;
 }
 
 function updateDisplay(item) {
@@ -184,4 +215,5 @@ function updateTail() {
 function updateBufferOperator(oper) {
   bufferOperator = oper;
   operandDisplay.textContent = bufferOperator;
+  pendingOperation = true;
 }

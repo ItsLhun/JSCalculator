@@ -1,7 +1,7 @@
 let displayValue = "";
 let tailValue = "";
-let floatingPressed = false;
 let bufferOperator = "";
+let pendingOperation = false;
 // The two main displays
 const operationTail = document.querySelector("#operationTail");
 const resultDisplay = document.querySelector("#result");
@@ -13,27 +13,51 @@ const plusButton = document.querySelector("#plus");
 const minusButton = document.querySelector("#minus");
 const multiplyButton = document.querySelector("#multiplication");
 const divisionButton = document.querySelector("#division");
+const equalButton = document.querySelector("#equal");
 
-const cEverythingButton = document.querySelector("#clearEverything");
-const clearButton = document.querySelector("#clear");
-const delButton = document.querySelector("#delete");
-const changeSymbol = document.querySelector("#changeSymbol");
-const floatingPoint = document.querySelector("#floatingPoint");
-floatingPoint.addEventListener("click", function () {
-  if (floatingPressed === true) {
-  } else {
-    if (displayValue.length > 0) {
-      updateDisplay(".");
-      0;
-      floatingPressed = true;
+let arrayOperators = [];
+arrayOperators.push(plusButton);
+arrayOperators.push(minusButton);
+arrayOperators.push(multiplyButton);
+arrayOperators.push(divisionButton);
+arrayOperators.push(equalButton);
+
+for (let i = 0; i < arrayOperators.length; i++) {
+  arrayOperators[i].addEventListener("click", function () {
+    if (arrayOperators[i].value === "Enter") {
+      if (!(bufferOperator === "") && pendingOperation === true) {
+        console.log("Operate will go here");
+      }
     } else {
-      updateDisplay("0.");
-      floatingPressed = true;
+      updateBufferOperator(arrayOperators[i].value);
+      pendingOperation = true;
     }
-  }
+  });
+}
+
+const cEntryButton = document.querySelector("#clearEntry");
+cEntryButton.addEventListener("click", function () {
+  updateDisplay("");
 });
 
-const equalButton = document.querySelector("#equal");
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", function () {
+  updateDisplay("");
+  updateBufferOperator("");
+  tailValue = "";
+  updateTail();
+  pendingOperation = false;
+});
+const delButton = document.querySelector("#delete");
+delButton.addEventListener("click", function () {
+  updateDisplay("del");
+});
+
+const changeSymbol = document.querySelector("#changeSymbol");
+
+const floatingPoint = document.querySelector("#floatingPoint");
+floatingPoint.addEventListener("click", processPoint);
+
 //numbers
 const zeroButton = document.querySelector("#zero");
 const oneButton = document.querySelector("#one");
@@ -77,11 +101,7 @@ document.addEventListener(
     }
     console.log(code);
     if (code === ".") {
-      if (floatingPressed === true) {
-      } else {
-        updateDisplay(".");
-        floatingPressed = true;
-      }
+      processPoint();
     } else if (
       code === "+" ||
       code === "-" ||
@@ -89,7 +109,7 @@ document.addEventListener(
       code === "*" ||
       code === "Enter"
     ) {
-      bufferOperator = code;
+      updateBufferOperator(code);
     } else if (Number.isNaN(Number(code))) {
     } else {
       updateDisplay(code);
@@ -105,40 +125,56 @@ function addition(numA, numB) {
 function substraction(numA, numB) {
   return numA - numB;
 }
-function division(numA, numB) {
-  return Float(numA / numB);
-}
 function multiplication(numA, numB) {
   return numA * numB;
 }
-function substraction(numA, numB) {
-  return numA - numB;
+function division(numA, numB) {
+  return Float(Float(numA) / numB);
 }
-function substraction(numA, numB) {
-  return numA - numB;
+
+function processPoint() {
+  if (displayValue.includes(".")) {
+  } else if (displayValue.length > 0) {
+    updateDisplay(".");
+  } else {
+    updateDisplay("0.");
+  }
 }
 
 function calculate(operator, numA, numB) {
   let result;
-  if (operator === "sum") {
+  if (operator === "+") {
     result = addition(numA, numB);
+  }
+  if (operator === "-") {
+    result = substraction(numA, numB);
+  }
+  if (operator === "*") {
+    result = multiplication(numA, numB);
+  }
+  if (operator === "/") {
+    result = division(numA, numB);
   }
   tailValue = result;
   updateTail();
 }
 
 function updateDisplay(item) {
-  if (bufferOperator === "") {
-    displayValue += item;
+  if (item === "") {
+    displayValue = "";
+  } else if (item === "del") {
+    displayValue = displayValue.slice(0, -1);
     resultDisplay.textContent = displayValue;
   } else {
-    if (tailValue === "") {
-      tailValue = displayValue;
-      updateTail();
-    }
+    displayValue += item;
   }
+  resultDisplay.textContent = displayValue;
 }
 
 function updateTail() {
   operationTail.textContent = tailValue;
+}
+function updateBufferOperator(oper) {
+  bufferOperator = oper;
+  operandDisplay.textContent = bufferOperator;
 }

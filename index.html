@@ -11,13 +11,15 @@
       <div class="calculatorFrame">
         <div class="titleFrame"><h1 class="title">Calculator</h1></div>
         <div class="resultDisplay">
-          <p id="operationTail" class="operationTail">asdasd</p>
+          <p id="operationTail" class="operationTail">0</p>
           <p id="operand" class="operand">+</p>
-          <p id="result" class="result">000</p>
+          <p id="result" class="result"></p>
         </div>
         <div class="buttonsHold">
-          <button id="division" name="%" class="button darkerButton">%</button>
-          <button id="clearEverything" name="CE" class="button darkerButton">
+          <button id="division" name="%" value="/" class="button darkerButton">
+            %
+          </button>
+          <button id="clearEntry" name="CE" class="button darkerButton">
             CE
           </button>
           <button id="clear" name="C" class="button darkerButton">C</button>
@@ -33,7 +35,12 @@
           <button id="nine" name="9" class="button lighterButton numButton">
             9
           </button>
-          <button id="multiplication" name="x" class="button darkerButton">
+          <button
+            id="multiplication"
+            name="x"
+            value="*"
+            class="button darkerButton"
+          >
             x
           </button>
           <button id="four" name="4" class="button lighterButton numButton">
@@ -45,7 +52,9 @@
           <button id="six" name="6" class="button lighterButton numButton">
             6
           </button>
-          <button id="minus" name="-" class="button darkerButton">-</button>
+          <button id="minus" name="-" value="-" class="button darkerButton">
+            -
+          </button>
           <button id="one" name="1" class="button lighterButton numButton">
             1
           </button>
@@ -55,7 +64,9 @@
           <button id="three" name="3" class="button lighterButton numButton">
             3
           </button>
-          <button id="plus" name="+" class="button darkerButton">+</button>
+          <button id="plus" name="+" value="+" class="button darkerButton">
+            +
+          </button>
           <button id="changeSymbol" name="+/-" class="button lighterButton">
             +/-
           </button>
@@ -65,7 +76,7 @@
           <button id="floatingPoint" name="." class="button lighterButton">
             .
           </button>
-          <button id="equal" name="=" class="button">=</button>
+          <button id="equal" name="=" value="Enter" class="button">=</button>
         </div>
       </div>
     </div>

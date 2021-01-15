@@ -26,7 +26,7 @@ for (let i = 0; i < arrayOperators.length; i++) {
   arrayOperators[i].addEventListener("click", function () {
     if (arrayOperators[i].value === "Enter") {
       if (!(bufferOperator === "") && pendingOperation === true) {
-        console.log("Operate will go here");
+        calculate(bufferOperator, tailValue, displayValue);
       }
     } else {
       updateBufferOperator(arrayOperators[i].value);
@@ -100,6 +100,12 @@ document.addEventListener(
       code = e.keyCode;
     }
     console.log(code);
+    if (code === "Backspace") {
+      updateDisplay("del");
+    }
+    if (code === "Delete") {
+      updateDisplay("");
+    }
     if (code === ".") {
       processPoint();
     } else if (
@@ -157,6 +163,7 @@ function calculate(operator, numA, numB) {
   }
   tailValue = result;
   updateTail();
+  pendingOperation = false;
 }
 
 function updateDisplay(item) {

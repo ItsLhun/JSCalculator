@@ -1,1 +1,4 @@
-ECHO is on.
+# JS-Calculator
+
+
+Fully functional calculator built entirely on JS. 

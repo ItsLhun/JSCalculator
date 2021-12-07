@@ -1,6 +1,7 @@
 # JS-Calculator
 
+A company I worked for disabled the windows calculator so I had to make my own.
 
-Fully functional calculator built entirely on JS.
+Built entirely on JS.
 
 https://itslhun.github.io/JSCalculator/
